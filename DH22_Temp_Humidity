@@ -1,0 +1,36 @@
+/*
+ * By Chidera Unigwe
+ */
+
+#include <Adafruit_Sensor.h>
+
+#include <DHT.h>
+#include <DHT_U.h>
+
+#define DHTTYPE DHT22 
+#define DHTPIN 8 
+
+
+//#define dataPin 8
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  //int readData = dht.read22(dataPin);
+  float t = (dht.readTemperature(true) - 32)* 5/9;
+  float h = dht.readHumidity();
+
+  Serial.print("Temperature = ");
+  Serial.print(t);
+  Serial.print(" C ");
+  Serial.print (" Humidity = ");
+  Serial.print(h);
+  Serial.println(" % ");
+  delay(2000);
+}
